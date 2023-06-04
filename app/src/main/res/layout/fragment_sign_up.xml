@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".SignUpFragment">
+
+    <EditText
+        android:id="@+id/emailEditText"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:hint="@string/email" />
+
+    <EditText
+        android:id="@+id/passwordEditText"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:hint="@string/password"
+        android:inputType="textPassword" />
+
+<!--    <EditText-->
+<!--        android:id="@+id/roleEditText"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:hint="Role" />-->
+    <Spinner
+        android:id="@+id/roleSpinner"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:prompt="@string/choose_role_prompt"
+        android:entries="@array/roles_array" />
+
+    <Button
+        android:id="@+id/signUpButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up" />
+</LinearLayout>
