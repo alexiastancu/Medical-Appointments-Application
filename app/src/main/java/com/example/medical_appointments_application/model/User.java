@@ -1,4 +1,4 @@
-package com.example.medical_appointments_application;
+package com.example.medical_appointments_application.model;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

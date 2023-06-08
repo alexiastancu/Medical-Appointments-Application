@@ -1,10 +1,13 @@
-package com.example.medical_appointments_application;
+package com.example.medical_appointments_application.authentification;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.os.Bundle;
+
+import com.example.medical_appointments_application.R;
+
 public class AuthentificationActivity extends AppCompatActivity {
 
     @Override

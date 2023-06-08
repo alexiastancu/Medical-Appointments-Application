@@ -1,9 +1,11 @@
-package com.example.medical_appointments_application;
+package com.example.medical_appointments_application.database;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
+
+import com.example.medical_appointments_application.model.User;
 
 @Dao
 public interface UserDao {

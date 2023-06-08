@@ -29,5 +29,23 @@
     <string name="choose_role_prompt">Choose Role</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-
+    <string name="doctors">doctors</string>
+    <string name="patients">patients</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string-array name="specializations_array">
+        <item>Cardiology</item>
+        <item>Dermatology</item>
+        <item>Gastroenterology</item>
+        <item>Neurology</item>
+        <item>Orthopedics</item>
+        <item>Psychiatry</item>
+        <item>Obstetrics and Gynecology</item>
+        <item>Pulmonology</item>
+        <item>Oncology</item>
+    </string-array>
+    <string name="choose_specialization_prompt">Choose Specialization</string>
+    <string name="telephone">Telephone Number</string>
+    <string name="title_activity_patient">PatientActivity</string>
+    <string name="title_activity_doctor">DoctorActivity</string>
 </resources>

@@ -5,32 +5,60 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".SignUpFragment">
+    tools:context=".authentification.SignUpFragment">
+
+    <Spinner
+        android:id="@+id/roleSpinner"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:entries="@array/roles_array"
+        android:prompt="@string/choose_role_prompt" />
+
+    <EditText
+        android:id="@+id/nameEditText"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:hint="@string/name" />
+
+    <EditText
+        android:id="@+id/surnameEditText"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:hint="@string/surname" />
+
+    <EditText
+        android:id="@+id/telephoneEditText"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:hint="@string/telephone"
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/ageEditText"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:hint="Age"
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/emailEditText"
         android:layout_width="300dp"
-        android:layout_height="48dp"
+        android:layout_height="50dp"
         android:hint="@string/email" />
 
     <EditText
         android:id="@+id/passwordEditText"
         android:layout_width="300dp"
-        android:layout_height="48dp"
+        android:layout_height="50dp"
         android:hint="@string/password"
         android:inputType="textPassword" />
 
-<!--    <EditText-->
-<!--        android:id="@+id/roleEditText"-->
-<!--        android:layout_width="300dp"-->
-<!--        android:layout_height="48dp"-->
-<!--        android:hint="Role" />-->
     <Spinner
-        android:id="@+id/roleSpinner"
+        android:id="@+id/specializationSpinner"
         android:layout_width="300dp"
-        android:layout_height="48dp"
-        android:prompt="@string/choose_role_prompt"
-        android:entries="@array/roles_array" />
+        android:layout_height="50dp"
+        android:entries="@array/specializations_array"
+        android:prompt="@string/choose_specialization_prompt" />
 
     <Button
         android:id="@+id/signUpButton"
