@@ -4,9 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/gradient_drawable">
 
-    <Button
+
+<Button
         android:id="@+id/signInButton"
         android:layout_width="230dp"
         android:layout_height="100dp"
@@ -25,11 +28,13 @@
         android:layout_marginTop="140dp"
         android:text="@string/sign_up"
         android:textSize="25sp"
-        android:textColor="@color/white"
+        android:textColor="@color/color_selector"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/shape_drawable"
+       />
 
     <Button
         android:id="@+id/patientsButton"
