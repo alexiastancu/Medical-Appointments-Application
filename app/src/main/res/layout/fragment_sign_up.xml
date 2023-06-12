@@ -5,33 +5,40 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".authentification.SignUpFragment">
+    tools:context=".authentification.SignUpFragment"
+    android:background="@color/darkgreen">
 
     <Spinner
         android:id="@+id/roleSpinner"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:entries="@array/roles_array"
-        android:prompt="@string/choose_role_prompt" />
+        android:prompt="@string/choose_role_prompt"
+        android:textColor="@color/white"
+       />
 
     <EditText
         android:id="@+id/nameEditText"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:hint="@string/name" />
+        android:hint="@string/name"
+        android:textColor="@color/white"/>
 
     <EditText
         android:id="@+id/surnameEditText"
+        android:textColor="@color/white"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:hint="@string/surname" />
+        android:hint="@string/surname"
+        />
 
     <EditText
         android:id="@+id/telephoneEditText"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:hint="@string/telephone"
-        android:inputType="phone" />
+        android:inputType="phone"
+        android:textColor="@color/white"/>
 
     <EditText
         android:id="@+id/ageEditText"
@@ -44,7 +51,8 @@
         android:id="@+id/emailEditText"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:hint="@string/email" />
+        android:hint="@string/email"
+        android:textColor="@color/white"/>
 
     <EditText
         android:id="@+id/passwordEditText"
@@ -58,11 +66,15 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:entries="@array/specializations_array"
-        android:prompt="@string/choose_specialization_prompt" />
+        android:prompt="@string/choose_specialization_prompt"
+        android:textColor="@color/white"/>
 
     <Button
         android:id="@+id/signUpButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sign_up" />
+        android:text="@string/sign_up"
+        android:textColor="@color/yellowgreen"
+        android:background="@color/yellowgreen"/>
+
 </LinearLayout>

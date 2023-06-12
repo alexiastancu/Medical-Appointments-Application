@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/gradient_drawable">
+    android:background="@color/darkgreen">
 
 
 <Button
@@ -16,6 +16,7 @@
         android:text="@string/sign_in"
         android:textSize="25sp"
         android:textColor="@color/white"
+        android:background="@color/yellowgreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,12 +29,11 @@
         android:layout_marginTop="140dp"
         android:text="@string/sign_up"
         android:textSize="25sp"
-        android:textColor="@color/color_selector"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/shape_drawable"
+        android:background="@color/yellowgreen"
        />
 
     <Button
@@ -42,6 +42,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="44dp"
         android:text="@string/patients"
+        android:background="@color/yellowgreen"
         android:textSize="25sp"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,6 +56,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="4dp"
         android:text="@string/doctors"
+        android:background="@color/yellowgreen"
         android:textColor="@color/white"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"

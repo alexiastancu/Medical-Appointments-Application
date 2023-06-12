@@ -5,25 +5,30 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".authentification.SignInFragment">
+    tools:context=".authentification.SignInFragment"
+    android:background="@color/darkgreen">
 
     <EditText
         android:id="@+id/emailEditText"
         android:layout_width="300dp"
         android:layout_height="48dp"
-        android:hint="@string/email" />
+        android:hint="@string/email"
+        android:textColor="@color/white"/>
 
     <EditText
         android:id="@+id/passwordEditText"
         android:layout_width="300dp"
         android:layout_height="48dp"
         android:hint="@string/password"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:textColor="@color/white"/>
 
     <Button
         android:id="@+id/signInButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sign_in" />
+        android:text="@string/sign_in"
+        android:background="@color/yellowgreen"
+        />
 
 </LinearLayout>
