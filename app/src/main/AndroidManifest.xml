@@ -12,18 +12,23 @@
         android:theme="@style/Theme.MedicalAppointmentsApplication"
         tools:targetApi="31">
         <activity
-            android:name=".DoctorActivity"
+            android:name="com.example.medical_appointments_application.doctor.DoctorActivity"
             android:exported="false"
             android:label="@string/title_activity_doctor"
-            android:theme="@style/Theme.MedicalAppointmentsApplication.NoActionBar" />
+            android:theme="@style/Theme.MedicalAppointmentsApplication"/>
+<!--            android:theme="@style/Theme.MedicalAppointmentsApplication.NoActionBar" -->
+
         <activity
-            android:name=".PatientActivity"
+            android:name="com.example.medical_appointments_application.patient.PatientActivity"
             android:exported="false"
             android:label="@string/title_activity_patient"
-            android:theme="@style/Theme.MedicalAppointmentsApplication.NoActionBar" />
+            android:theme="@style/Theme.MedicalAppointmentsApplication"/>
+
+<!--            android:theme="@style/Theme.MedicalAppointmentsApplication.NoActionBar" -->
         <activity
             android:name=".authentification.AuthentificationActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.MedicalAppointmentsApplication.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

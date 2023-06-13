@@ -140,74 +140,117 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
     return view;
 }
 
+    private void signUp(String name, String surname, String email, String password, String role, String specialization) {
+        // Perform sign-up operation on a background thread
+        new Thread(() -> {
+            // Check for empty fields
+            if (name.isEmpty() || surname.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                requireActivity().runOnUiThread(() -> {
+                    // Display an error message for empty fields
+                    Toast.makeText(requireContext(), "Please fill in all the fields", Toast.LENGTH_SHORT).show();
+                });
+                return;
+            }
 
-    //    private void signUp(String email, String password, String role) {
-//        // Perform sign-up operation on a background thread
-//        new Thread(() -> {
-//            // Check if the user already exists
-//            User existingUser = userDao.getUserByEmail(email);
-//            if (existingUser != null) {
-//                requireActivity().runOnUiThread(() -> {
-//                    // User with the same email already exists
-//                    Toast.makeText(requireContext(), "User with this email already exists", Toast.LENGTH_SHORT).show();
-//                });
-//                return;
-//            }
-//
-//            // Create a new user and insert into the database
-//            User newUser = new User(email, password, role);
-//            userDao.insert(newUser);
-//
-//            requireActivity().runOnUiThread(() -> {
-//                // Sign-up successful
-//                Toast.makeText(requireContext(), "Sign-up successful!", Toast.LENGTH_SHORT).show();
-//                // Clear the input fields
-//                emailEditText.setText("");
-//                passwordEditText.setText("");
-//                roleSpinner.setSelection(0);
-//            });
-//        }).start();
-//    }
-private void signUp(String name, String surname, String email, String password, String role, String specialization) {
-    // Perform sign-up operation on a background thread
-    new Thread(() -> {
-        // Check if the user already exists
-        User existingUser = userDao.getUserByEmail(email);
-        if (existingUser != null) {
+            // Check if the user already exists
+            User existingUser = userDao.getUserByEmail(email);
+            if (existingUser != null) {
+                requireActivity().runOnUiThread(() -> {
+                    // User with the same email already exists
+                    Toast.makeText(requireContext(), "User with this email already exists", Toast.LENGTH_SHORT).show();
+                });
+                return;
+            }
+
+            // Create a new user and insert into the database
+            User newUser = new User(email, password, role);
+            userDao.insert(newUser);
+            int userId = newUser.getId();
+
+            // Check the user's role and insert into the respective table
+            if (role.equals("Doctor")) {
+                // Check for empty specialization field
+                if (specialization.isEmpty()) {
+                    requireActivity().runOnUiThread(() -> {
+                        // Display an error message for empty specialization
+                        Toast.makeText(requireContext(), "Please enter specialization", Toast.LENGTH_SHORT).show();
+                    });
+                    return;
+                }
+
+                Doctor newDoctor = new Doctor(name, surname, specialization, email);
+                doctorDao.insert(newDoctor);
+            } else if (role.equals("Patient")) {
+                // Check for empty age field
+                if (ageEditText.getText().toString().isEmpty()) {
+                    requireActivity().runOnUiThread(() -> {
+                        // Display an error message for empty age
+                        Toast.makeText(requireContext(), "Please enter age", Toast.LENGTH_SHORT).show();
+                    });
+                    return;
+                }
+
+                Patient newPatient = new Patient(name, surname, Integer.parseInt(ageEditText.getText().toString()), phoneEditText.getText().toString());
+                patientDao.insert(newPatient);
+            }
+
             requireActivity().runOnUiThread(() -> {
-                // User with the same email already exists
-                Toast.makeText(requireContext(), "User with this email already exists", Toast.LENGTH_SHORT).show();
+                // Sign-up successful
+                Toast.makeText(requireContext(), "Sign-up successful!", Toast.LENGTH_SHORT).show();
+                nameEditText.setText("");
+                surnameEditText.setText("");
+                ageEditText.setText("");
+                phoneEditText.setText("");
+                emailEditText.setText("");
+                passwordEditText.setText("");
+                roleSpinner.setSelection(0);
+                specializationSpinner.setSelection(0);
             });
-            return;
-        }
+        }).start();
+    }
 
-        // Create a new user and insert into the database
-        User newUser = new User(email, password, role);
-        userDao.insert(newUser);
-        int userId = newUser.getId();
 
-        // Check the user's role and insert into the respective table
-        if (role.equals("Doctor")) {
-            Doctor newDoctor = new Doctor(name, surname, specialization, email);
-            doctorDao.insert(newDoctor);
-        } else if (role.equals("Patient")) {
-            Patient newPatient = new Patient(name, surname, Integer.parseInt(ageEditText.getText().toString()), phoneEditText.getText().toString());
-            patientDao.insert(newPatient);
-        }
 
-        requireActivity().runOnUiThread(() -> {
-            // Sign-up successful
-            Toast.makeText(requireContext(), "Sign-up successful!", Toast.LENGTH_SHORT).show();
-            nameEditText.setText("");
-            surnameEditText.setText("");
-            ageEditText.setText("");
-            phoneEditText.setText("");
-            emailEditText.setText("");
-            passwordEditText.setText("");
-            roleSpinner.setSelection(0);
-            specializationSpinner.setSelection(0);
-        });
-    }).start();
-}
+//private void signUp(String name, String surname, String email, String password, String role, String specialization) {
+//    // Perform sign-up operation on a background thread
+//    new Thread(() -> {
+//        // Check if the user already exists
+//        User existingUser = userDao.getUserByEmail(email);
+//        if (existingUser != null) {
+//            requireActivity().runOnUiThread(() -> {
+//                // User with the same email already exists
+//                Toast.makeText(requireContext(), "User with this email already exists", Toast.LENGTH_SHORT).show();
+//            });
+//            return;
+//        }
+//
+//        // Create a new user and insert into the database
+//        User newUser = new User(email, password, role);
+//        userDao.insert(newUser);
+//        int userId = newUser.getId();
+//
+//        // Check the user's role and insert into the respective table
+//        if (role.equals("Doctor")) {
+//            Doctor newDoctor = new Doctor(name, surname, specialization, email);
+//            doctorDao.insert(newDoctor);
+//        } else if (role.equals("Patient")) {
+//            Patient newPatient = new Patient(name, surname, Integer.parseInt(ageEditText.getText().toString()), phoneEditText.getText().toString());
+//            patientDao.insert(newPatient);
+//        }
+//
+//        requireActivity().runOnUiThread(() -> {
+//            // Sign-up successful
+//            Toast.makeText(requireContext(), "Sign-up successful!", Toast.LENGTH_SHORT).show();
+//            nameEditText.setText("");
+//            surnameEditText.setText("");
+//            ageEditText.setText("");
+//            phoneEditText.setText("");
+//            emailEditText.setText("");
+//            passwordEditText.setText("");
+//            roleSpinner.setSelection(0);
+//            specializationSpinner.setSelection(0);
+//        });
+//    }).start();
+//}
 
 }

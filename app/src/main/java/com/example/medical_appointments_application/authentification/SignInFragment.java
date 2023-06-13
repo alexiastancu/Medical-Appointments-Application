@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.medical_appointments_application.database.AppDatabase;
 import com.example.medical_appointments_application.R;
 import com.example.medical_appointments_application.database.UserDao;
+import com.example.medical_appointments_application.doctor.DoctorActivity;
 import com.example.medical_appointments_application.model.User;
 import com.example.medical_appointments_application.patient.PatientActivity;
 
@@ -57,22 +58,29 @@ public class SignInFragment extends Fragment {
     }
 
     private void signIn(String email, String password) {
-        // Perform sign-in operation and validate user credentials on a background thread
         new Thread(() -> {
             User user = userDao.getUser(email, password);
 
             requireActivity().runOnUiThread(() -> {
                 if (user != null) {
-                    // Sign-in successful, determine user role and navigate accordingly
                     String role = user.getRole();
 
-                    NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
-                    int destinationId = role.equals("Doctor") ? R.id.MainPageDoctorFragment : R.id.MainPagePatientFragment;
-                    navController.navigate(destinationId);
+                    if (role.equals("Doctor")) {
+                        Intent intent = new Intent(requireContext(), DoctorActivity.class);
+                        startActivity(intent);
+                        NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
+                        navController.navigate(R.id.action_signInFragment_to_MainPageDoctorFragment);
+                        requireActivity().finishAffinity();
+                    } else if (role.equals("Patient")) {
+                        Intent intent = new Intent(requireContext(), PatientActivity.class);
+                        startActivity(intent);
+                        NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
+                        navController.navigate(R.id.action_signInFragment_to_MainPagePatientFragment);
+                        requireActivity().finishAffinity();
+                    }
 
                     Toast.makeText(requireContext(), "Sign-in successful!", Toast.LENGTH_SHORT).show();
                 } else {
-                    // Invalid credentials, display an error message
                     Toast.makeText(requireContext(), "Invalid email or password", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -82,16 +90,25 @@ public class SignInFragment extends Fragment {
 
 
 //    private void signIn(String email, String password) {
-//        // Perform sign-in operation and validate user credentials on a background thread
 //        new Thread(() -> {
 //            User user = userDao.getUser(email, password);
 //
 //            requireActivity().runOnUiThread(() -> {
 //                if (user != null) {
-//                    // Sign-in successful, navigate to the next screen
+//                    String role = user.getRole();
+//
+//                    if (role.equals("Doctor")) {
+//                        Intent intent = new Intent(requireContext(), DoctorActivity.class);
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        startActivity(intent);
+//                        requireActivity().finish();
+//                    } else if (role.equals("Patient")) {
+//                        Intent intent = new Intent(requireContext(), PatientActivity.class);
+//                        startActivity(intent);
+//                    }
+//
 //                    Toast.makeText(requireContext(), "Sign-in successful!", Toast.LENGTH_SHORT).show();
 //                } else {
-//                    // Invalid credentials, display an error message
 //                    Toast.makeText(requireContext(), "Invalid email or password", Toast.LENGTH_SHORT).show();
 //                }
 //            });

@@ -5,49 +5,75 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/authMethodFragment">
 
+    <!-- AuthMethodFragment -->
     <fragment
         android:id="@+id/authMethodFragment"
         android:name="com.example.medical_appointments_application.authentification.AuthMethodFragment"
         android:label="Authentication Method"
-        tools:layout="@layout/fragment_auth_method" />
+        tools:layout="@layout/fragment_auth_method">
 
+        <action
+            android:id="@+id/action_authMethodFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_authMethodFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+
+    <!-- SignInFragment -->
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.example.medical_appointments_application.authentification.SignInFragment"
         android:label="Sign In"
-        tools:layout="@layout/fragment_sign_in" />
+        tools:layout="@layout/fragment_sign_in">
 
+        <action
+            android:id="@+id/action_signInFragment_to_MainPageDoctorFragment"
+            app:destination="@id/MainPageDoctorFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_MainPagePatientFragment"
+            app:destination="@id/MainPagePatientFragment" />
+    </fragment>
+
+    <!-- SignUpFragment -->
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.example.medical_appointments_application.authentification.SignUpFragment"
         android:label="Sign Up"
-        tools:layout="@layout/fragment_sign_up" />
+        tools:layout="@layout/fragment_sign_up">
 
-    <action
-        android:id="@+id/action_authMethodFragment_to_signInFragment"
-        app:destination="@id/signInFragment" />
-
-    <action
-        android:id="@+id/action_authMethodFragment_to_signUpFragment"
-        app:destination="@id/signUpFragment" />
-
-
-
-
-    <fragment
-        android:id="@+id/MainPagePatientFragment"
-        android:name="com.example.medical_appointments_application.patient.MainPagePatientFragment"
-        android:label="Patient main Page"
-        tools:layout="@layout/fragment_main_page_patient">
+        <action
+            android:id="@+id/action_signUpFragment_to_MainPageDoctorFragment"
+            app:destination="@id/MainPageDoctorFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_MainPagePatientFragment"
+            app:destination="@id/MainPagePatientFragment" />
     </fragment>
 
+    <!-- MainPageDoctorFragment -->
     <fragment
         android:id="@+id/MainPageDoctorFragment"
         android:name="com.example.medical_appointments_application.doctor.MainPageDoctorFragment"
-        android:label="Doctor Main Page"
-        tools:layout="@layout/fragment_main_page_doctor"/>
+        android:label="Main Page Doctor"
+        tools:layout="@layout/fragment_main_page_doctor" />
 
+    <!-- MainPagePatientFragment -->
+    <fragment
+        android:id="@+id/MainPagePatientFragment"
+        android:name="com.example.medical_appointments_application.patient.MainPagePatientFragment"
+        android:label="Main Page Patient"
+        tools:layout="@layout/fragment_main_page_patient" />
 
+    <!-- DoctorActivity -->
+    <activity
+        android:id="@+id/doctorActivity"
+        android:name="com.example.medical_appointments_application.doctor.DoctorActivity"
+        android:label="Doctor Activity" />
+
+    <!-- PatientActivity -->
+    <activity
+        android:id="@+id/patientActivity"
+        android:name="com.example.medical_appointments_application.patient.PatientActivity"
+        android:label="Patient Activity" />
 
 </navigation>
-
