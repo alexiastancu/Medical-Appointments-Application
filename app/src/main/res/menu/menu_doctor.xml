@@ -13,4 +13,10 @@
         android:orderInCategory="200"
         android:title="Personal Info"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_previous_appointments"
+        android:orderInCategory="300"
+        android:title="Previous Appointments"
+        app:showAsAction="never" />
 </menu>

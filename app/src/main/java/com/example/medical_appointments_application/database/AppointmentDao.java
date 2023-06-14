@@ -7,6 +7,8 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.medical_appointments_application.model.Appointment;
+import com.example.medical_appointments_application.model.Doctor;
+import com.example.medical_appointments_application.model.Patient;
 
 import java.util.List;
 
@@ -25,5 +27,9 @@ public interface AppointmentDao {
     @Query("SELECT * FROM appointments")
     List<Appointment> getAllAppointments();
 
-    // Add other query methods as needed
+    @Query("SELECT * FROM doctors WHERE id = :doctorId")
+    Doctor getDoctorById(int doctorId);
+
+    @Query("SELECT * FROM patients WHERE id = :patientId")
+    Patient getPatientById(int patientId);
 }
