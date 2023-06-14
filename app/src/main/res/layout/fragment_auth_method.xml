@@ -6,43 +6,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/darkgreen">
+    android:background="@color/green">
 
 
-<Button
+<androidx.appcompat.widget.AppCompatButton
         android:id="@+id/signInButton"
         android:layout_width="230dp"
         android:layout_height="100dp"
         android:text="@string/sign_in"
         android:textSize="25sp"
         android:textColor="@color/white"
-        android:background="@color/yellowgreen"
+        android:background="@drawable/selector_drawable"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/signUpButton" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/signUpButton"
         android:layout_width="230dp"
         android:layout_height="100dp"
         android:layout_marginTop="140dp"
         android:text="@string/sign_up"
         android:textSize="25sp"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/yellowgreen"
+        android:background="@drawable/selector_drawable"
        />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/patientsButton"
         android:layout_width="230dp"
         android:layout_height="100dp"
         android:layout_marginTop="44dp"
         android:text="@string/patients"
-        android:background="@color/yellowgreen"
+        android:background="@drawable/selector_drawable"
         android:textSize="25sp"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,13 +51,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/signInButton" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/doctorsButton"
         android:layout_width="230dp"
         android:layout_height="100dp"
         android:layout_marginTop="4dp"
         android:text="@string/doctors"
-        android:background="@color/yellowgreen"
+        android:background="@drawable/selector_drawable"
         android:textColor="@color/white"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"

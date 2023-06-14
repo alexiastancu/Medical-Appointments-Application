@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:gravity="center"
     tools:context=".authentification.SignUpFragment"
-    android:background="@color/darkgreen">
+    android:background="@color/green">
 
     <Spinner
         android:id="@+id/roleSpinner"
