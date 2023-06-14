@@ -69,12 +69,12 @@
         android:prompt="@string/choose_specialization_prompt"
         android:textColor="@color/white"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/signUpButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_up"
-        android:textColor="@color/yellowgreen"
-        android:background="@color/yellowgreen"/>
+        android:textColor="@color/white"
+        android:background="@drawable/selector_drawable"/>
 
 </LinearLayout>
