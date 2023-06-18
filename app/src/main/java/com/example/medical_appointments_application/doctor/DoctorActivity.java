@@ -79,7 +79,8 @@ public class DoctorActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         } else if (id == R.id.action_personal_info) {
-            // Handle action_personal_info item click
+            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_doctor);
+            navController.navigate(R.id.action_mainPageDoctorFragment_to_doctorDetailsFragment);
             return true;
         }
 

@@ -10,4 +10,15 @@
         android:name="com.example.medical_appointments_application.doctor.MainPageDoctorFragment"
         android:label="Main Page Doctor"
         tools:layout="@layout/fragment_main_page_doctor" />
+
+    <fragment
+        android:id="@+id/DoctorDetailsFragment"
+        android:name="com.example.medical_appointments_application.doctor.DoctorDetailsFragment"
+        android:label="Doctor Details"
+        tools:layout="@layout/fragment_doctor_details" />
+
+    <action
+        android:id="@+id/action_mainPageDoctorFragment_to_doctorDetailsFragment"
+        app:destination="@id/DoctorDetailsFragment" />
+
 </navigation>
