@@ -25,5 +25,9 @@ public interface PatientDao {
     @Query("SELECT * FROM patients")
     List<Patient> getAllPatients();
 
-    // Add other query methods as needed
+    @Query("SELECT * FROM patients WHERE patient_id = :patientId")
+    Patient getPatientById(int patientId);
+
+    @Query("SELECT * FROM patients WHERE user_id = :userId")
+    Patient getPatientByUserId(int userId);
 }

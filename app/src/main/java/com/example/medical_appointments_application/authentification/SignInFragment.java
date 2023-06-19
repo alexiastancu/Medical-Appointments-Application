@@ -1,6 +1,9 @@
 package com.example.medical_appointments_application.authentification;
 
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -15,8 +18,12 @@ import android.widget.Toast;
 
 import com.example.medical_appointments_application.database.AppDatabase;
 import com.example.medical_appointments_application.R;
+import com.example.medical_appointments_application.database.DoctorDao;
+import com.example.medical_appointments_application.database.PatientDao;
 import com.example.medical_appointments_application.database.UserDao;
 import com.example.medical_appointments_application.doctor.DoctorActivity;
+import com.example.medical_appointments_application.model.Doctor;
+import com.example.medical_appointments_application.model.Patient;
 import com.example.medical_appointments_application.model.User;
 import com.example.medical_appointments_application.patient.PatientActivity;
 
@@ -26,6 +33,8 @@ public class SignInFragment extends Fragment {
     private EditText passwordEditText;
     private Button signInButton;
     private UserDao userDao;
+    private DoctorDao doctorDao;
+    private PatientDao patientDao;
 
     public SignInFragment() {
         // Required empty public constructor
@@ -36,6 +45,8 @@ public class SignInFragment extends Fragment {
         super.onCreate(savedInstanceState);
         AppDatabase userDatabase = AppDatabase.getInstance(requireContext());
         userDao = userDatabase.userDao();
+        doctorDao = userDatabase.doctorDao();
+        patientDao = userDatabase.patientDao();
     }
 
     @Override
@@ -57,36 +68,67 @@ public class SignInFragment extends Fragment {
         return view;
     }
 
+    @SuppressLint("StaticFieldLeak")
     private void signIn(String email, String password) {
-        new Thread(() -> {
-            User user = userDao.getUser(email, password);
+        new AsyncTask<Void, Void, User>() {
+            @Override
+            protected User doInBackground(Void... voids) {
+                return userDao.getUser(email, password);
+            }
 
-            requireActivity().runOnUiThread(() -> {
+            @SuppressLint("StaticFieldLeak")
+            @Override
+            protected void onPostExecute(User user) {
                 if (user != null) {
                     String role = user.getRole();
 
                     if (role.equals("Doctor")) {
-                        Intent intent = new Intent(requireContext(), DoctorActivity.class);
-                        startActivity(intent);
-                        NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
-                        navController.navigate(R.id.action_signInFragment_to_MainPageDoctorFragment);
-                        requireActivity().finishAffinity();
+                        new AsyncTask<Void, Void, Doctor>() {
+                            @Override
+                            protected Doctor doInBackground(Void... voids) {
+                                return doctorDao.getDoctorByUserId(user.getId());
+                            }
+
+                            @Override
+                            protected void onPostExecute(Doctor doctor) {
+                                if (doctor != null) {
+                                    Intent intent = new Intent(requireContext(), DoctorActivity.class);
+                                    intent.putExtra("doctor", doctor);
+                                    startActivity(intent);
+                                    requireActivity().finishAffinity();
+                                } else {
+                                    Toast.makeText(requireContext(), "Invalid doctor account", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }.execute();
                     } else if (role.equals("Patient")) {
-                        Intent intent = new Intent(requireContext(), PatientActivity.class);
-                        startActivity(intent);
-                        NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
-                        navController.navigate(R.id.action_signInFragment_to_MainPagePatientFragment);
-                        requireActivity().finishAffinity();
+                        new AsyncTask<Void, Void, Patient>() {
+                            @Override
+                            protected Patient doInBackground(Void... voids) {
+                                return patientDao.getPatientByUserId(user.getId());
+                            }
+
+                            @Override
+                            protected void onPostExecute(Patient patient) {
+                                if (patient != null) {
+                                    Intent intent = new Intent(requireContext(), PatientActivity.class);
+                                    intent.putExtra("patient", patient);
+                                    startActivity(intent);
+                                    requireActivity().finishAffinity();
+                                } else {
+                                    Toast.makeText(requireContext(), "Invalid patient account", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }.execute();
                     }
 
                     Toast.makeText(requireContext(), "Sign-in successful!", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(requireContext(), "Invalid email or password", Toast.LENGTH_SHORT).show();
                 }
-            });
-        }).start();
+            }
+        }.execute();
     }
-
 
 
 //    private void signIn(String email, String password) {
@@ -98,13 +140,25 @@ public class SignInFragment extends Fragment {
 //                    String role = user.getRole();
 //
 //                    if (role.equals("Doctor")) {
-//                        Intent intent = new Intent(requireContext(), DoctorActivity.class);
-//                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                        startActivity(intent);
-//                        requireActivity().finish();
+//                        Doctor doctor = doctorDao.getDoctorByUserId(user.getId());
+//                        if (doctor != null) {
+//                            Intent intent = new Intent(requireContext(), DoctorActivity.class);
+//                            intent.putExtra("doctor", doctor); // Pass the doctor object to the DoctorActivity
+//                            startActivity(intent);
+//                            requireActivity().finishAffinity();
+//                        } else {
+//                            Toast.makeText(requireContext(), "Invalid doctor account", Toast.LENGTH_SHORT).show();
+//                        }
 //                    } else if (role.equals("Patient")) {
-//                        Intent intent = new Intent(requireContext(), PatientActivity.class);
-//                        startActivity(intent);
+//                        Patient patient = patientDao.getPatientByUserId(user.getId());
+//                        if (patient != null) {
+//                            Intent intent = new Intent(requireContext(), PatientActivity.class);
+//                            intent.putExtra("patient", patient); // Pass the patient object to the PatientActivity
+//                            startActivity(intent);
+//                            requireActivity().finishAffinity();
+//                        } else {
+//                            Toast.makeText(requireContext(), "Invalid patient account", Toast.LENGTH_SHORT).show();
+//                        }
 //                    }
 //
 //                    Toast.makeText(requireContext(), "Sign-in successful!", Toast.LENGTH_SHORT).show();
@@ -114,6 +168,11 @@ public class SignInFragment extends Fragment {
 //            });
 //        }).start();
 //    }
+
+
+
+
+
 
 
 

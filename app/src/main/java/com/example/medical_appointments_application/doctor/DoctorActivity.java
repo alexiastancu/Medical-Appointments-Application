@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 
 import com.example.medical_appointments_application.databinding.ActivityDoctorBinding;
+import com.example.medical_appointments_application.model.Doctor;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -29,6 +31,8 @@ public class DoctorActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private ActivityDoctorBinding binding;
 
+    private Doctor doctor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +40,9 @@ public class DoctorActivity extends AppCompatActivity {
         binding = ActivityDoctorBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-//        setSupportActionBar(binding.toolbar);
+        // Retrieve the doctor object from the intent
+        doctor = getIntent().getParcelableExtra("doctor");
+
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_doctor);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
@@ -52,6 +58,7 @@ public class DoctorActivity extends AppCompatActivity {
             }
         });
     }
+
 
 
     @Override
@@ -87,20 +94,32 @@ public class DoctorActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private int backPressCounter = 0;
+
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Exit Confirmation")
-                .setMessage("Are you sure you want to exit?")
-                .setPositiveButton("Yes", (dialog, which) -> {
-                    // Exit the app
-                    finish();
-                })
-                .setNegativeButton("No", (dialog, which) -> {
-                    // Dismiss the dialog and do nothing
-                    dialog.dismiss();
-                })
-                .show();
+        if (backPressCounter < 2) {
+            backPressCounter++;
+            Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Exit Confirmation")
+                    .setMessage("Are you sure you want to exit?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        // Exit the app
+                        finish();
+                    })
+                    .setNegativeButton("No", (dialog, which) -> {
+                        // Reset the back press counter
+                        backPressCounter = 0;
+                        dialog.dismiss();
+                    })
+                    .show();
+        }
     }
 
+
+    public Doctor getDoctor() {
+        return this.doctor;
+    }
 }

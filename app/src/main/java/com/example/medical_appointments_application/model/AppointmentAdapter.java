@@ -1,5 +1,6 @@
 package com.example.medical_appointments_application.model;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.medical_appointments_application.R;
+import com.example.medical_appointments_application.database.AppDatabase;
 import com.example.medical_appointments_application.database.AppointmentDao;
+import com.example.medical_appointments_application.database.DoctorDao;
+import com.example.medical_appointments_application.database.PatientDao;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -19,20 +23,30 @@ import java.util.List;
 public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.ViewHolder> {
     private List<Appointment> appointments;
     private static AppointmentDao appointmentDao;
+    public static DoctorDao doctorDao;
+    public static PatientDao patientDao;
 
-    public AppointmentAdapter(List<Appointment> appointments, AppointmentDao appointmentDao) {
+
+    public AppointmentAdapter(List<Appointment> appointments, AppointmentDao appointmentDao, DoctorDao doctorDao) {
         this.appointments = appointments;
         this.appointmentDao = appointmentDao;
+        this.doctorDao = doctorDao;
+
     }
 
-    public AppointmentAdapter(AppointmentDao appointmentDao) {
+    public AppointmentAdapter(Context context, AppointmentDao appointmentDao, DoctorDao doctorDao) {
         this.appointments = new ArrayList<>();
+
         this.appointmentDao = appointmentDao;
+        this.doctorDao = doctorDao;
+        this.patientDao = AppDatabase.getInstance(context).patientDao();
     }
+
 
     public void setAppointments(List<Appointment> newAppointments) {
         appointments.clear();
         appointments.addAll(newAppointments);
+
         notifyDataSetChanged();
     }
 
@@ -80,6 +94,8 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         private WeakReference<ViewHolder> viewHolderReference;
         private AppointmentDao appointmentDao;
 
+
+
         public DatabaseTask(ViewHolder viewHolder, AppointmentDao appointmentDao) {
             this.viewHolderReference = new WeakReference<>(viewHolder);
             this.appointmentDao = appointmentDao;
@@ -88,8 +104,8 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         @Override
         protected String[] doInBackground(Appointment... appointments) {
             Appointment appointment = appointments[0];
-            Doctor doctor = appointmentDao.getDoctorById(appointment.getDoctorId());
-            Patient patient = appointmentDao.getPatientById(appointment.getPatientId());
+            Doctor doctor = doctorDao.getDoctorById(appointment.getDoctorId());
+            Patient patient = patientDao.getPatientById(appointment.getPatientId());
 
             String doctorName = "Doctor: " + doctor.getName() + " " + doctor.getSurname();
             String patientName = "Patient: " + patient.getName() + " " + patient.getSurname();

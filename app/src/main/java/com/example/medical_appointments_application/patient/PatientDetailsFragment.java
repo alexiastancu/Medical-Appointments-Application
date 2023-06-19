@@ -34,15 +34,19 @@ public class PatientDetailsFragment extends Fragment {
         TextView ageTextView = view.findViewById(R.id.ageTextView);
         TextView telephoneNumberTextView = view.findViewById(R.id.telephoneNumberTextView);
 
+        // Retrieve the patient object from the activity
+        Patient patient = ((PatientActivity) requireActivity()).getPatient();
+
         if (patient != null) {
-            nameTextView.setText(patient.getName());
-            surnameTextView.setText(patient.getSurname());
-            ageTextView.setText(String.valueOf(patient.getAge()));
-            telephoneNumberTextView.setText(patient.getTelephoneNumber());
+            nameTextView.setText("Name: " + patient.getName());
+            surnameTextView.setText("Surname: " + patient.getSurname());
+            ageTextView.setText("Age: " + String.valueOf(patient.getAge()));
+            telephoneNumberTextView.setText("Telephone number: " + patient.getTelephoneNumber());
         }
 
         return view;
     }
+
 
 
     @Override

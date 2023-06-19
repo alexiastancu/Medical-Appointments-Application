@@ -34,15 +34,19 @@ public class DoctorDetailsFragment extends Fragment {
         TextView specializationTextView = view.findViewById(R.id.specializationTextView);
         TextView emailTextView = view.findViewById(R.id.emailTextView);
 
+        // Retrieve the doctor object from the activity
+        Doctor doctor = ((DoctorActivity) requireActivity()).getDoctor();
+
         if (doctor != null) {
-            nameTextView.setText(doctor.getName());
-            surnameTextView.setText(doctor.getSurname());
-            specializationTextView.setText(doctor.getSpecialization());
-            emailTextView.setText(doctor.getEmail());
+            nameTextView.setText("Name: " + doctor.getName());
+            surnameTextView.setText("Surname: " + doctor.getSurname());
+            specializationTextView.setText("Specialization: " + doctor.getSpecialization());
+            emailTextView.setText("Email: " + doctor.getEmail());
         }
 
         return view;
     }
+
 
 
 

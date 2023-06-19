@@ -27,9 +27,13 @@ public interface AppointmentDao {
     @Query("SELECT * FROM appointments")
     List<Appointment> getAllAppointments();
 
-    @Query("SELECT * FROM doctors WHERE id = :doctorId")
-    Doctor getDoctorById(int doctorId);
+    @Query("SELECT * FROM appointments WHERE patient_id = :patientId")
+    List<Appointment> getAppointmentsForPatient(int patientId);
 
-    @Query("SELECT * FROM patients WHERE id = :patientId")
-    Patient getPatientById(int patientId);
+    @Query("SELECT * FROM appointments WHERE doctor_id = :doctorId")
+    List<Appointment> getAppointmentsForDoctor(int doctorId);
+
+
+
+
 }

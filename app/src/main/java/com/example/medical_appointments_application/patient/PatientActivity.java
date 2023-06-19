@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 
 import com.example.medical_appointments_application.databinding.ActivityPatientBinding;
+import com.example.medical_appointments_application.model.Patient;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +25,7 @@ public class PatientActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityPatientBinding binding;
+    private Patient patient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,8 @@ public class PatientActivity extends AppCompatActivity {
 
         binding = ActivityPatientBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        patient = getIntent().getParcelableExtra("patient");
 
 //        setSupportActionBar(binding.toolbar);
 
@@ -91,6 +95,10 @@ public class PatientActivity extends AppCompatActivity {
                     dialog.dismiss();
                 })
                 .show();
+    }
+
+    public Patient getPatient() {
+        return patient;
     }
 
 }

@@ -2,15 +2,22 @@ package com.example.medical_appointments_application.model;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 @Entity(tableName = "users")
-public class User {
+public class User implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     private int id;
+
     @ColumnInfo(name = "email")
     private String email;
+
     @ColumnInfo(name = "password")
     private String password;
+
     @ColumnInfo(name = "role")
     private String role;
 
@@ -19,6 +26,38 @@ public class User {
         this.password = password;
         this.role = role;
     }
+
+    protected User(Parcel in) {
+        id = in.readInt();
+        email = in.readString();
+        password = in.readString();
+        role = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(email);
+        dest.writeString(password);
+        dest.writeString(role);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -52,4 +91,3 @@ public class User {
         this.role = role;
     }
 }
-

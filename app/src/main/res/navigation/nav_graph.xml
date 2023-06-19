@@ -48,6 +48,10 @@
         <action
             android:id="@+id/action_signUpFragment_to_MainPagePatientFragment"
             app:destination="@id/MainPagePatientFragment" />
+
+        <action
+            android:id="@+id/action_signUpFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
     </fragment>
 
     <!-- MainPageDoctorFragment -->
@@ -65,15 +69,7 @@
         tools:layout="@layout/fragment_main_page_patient" />
 
     <!-- DoctorActivity -->
-    <activity
-        android:id="@+id/doctorActivity"
-        android:name="com.example.medical_appointments_application.doctor.DoctorActivity"
-        android:label="Doctor Activity" />
 
     <!-- PatientActivity -->
-    <activity
-        android:id="@+id/patientActivity"
-        android:name="com.example.medical_appointments_application.patient.PatientActivity"
-        android:label="Patient Activity" />
 
 </navigation>

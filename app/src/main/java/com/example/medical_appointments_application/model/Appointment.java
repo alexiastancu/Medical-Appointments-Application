@@ -9,6 +9,7 @@ import java.util.Date;
 @Entity(tableName = "appointments")
 public class Appointment {
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "appointment_id")
     private int id;
 
     @ColumnInfo(name = "doctor_id")

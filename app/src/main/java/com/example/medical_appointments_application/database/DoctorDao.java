@@ -25,5 +25,9 @@ public interface DoctorDao {
     @Query("SELECT * FROM doctors")
     List<Doctor> getAllDoctors();
 
-    // Add other query methods as needed
+    @Query("SELECT * FROM doctors WHERE doctor_id = :doctorId")
+    Doctor getDoctorById(int doctorId);
+
+    @Query("SELECT * FROM doctors WHERE user_id = :userId")
+    Doctor getDoctorByUserId(int userId);
 }
