@@ -34,11 +34,11 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
 
     }
 
-    public AppointmentAdapter(Context context, AppointmentDao appointmentDao, DoctorDao doctorDao) {
+    public AppointmentAdapter(Context context, AppointmentDao appointmentDao) {
         this.appointments = new ArrayList<>();
 
         this.appointmentDao = appointmentDao;
-        this.doctorDao = doctorDao;
+        this.doctorDao = AppDatabase.getInstance(context).doctorDao();
         this.patientDao = AppDatabase.getInstance(context).patientDao();
     }
 

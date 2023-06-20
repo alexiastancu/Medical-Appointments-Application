@@ -51,7 +51,7 @@ public class MainPageDoctorFragment extends Fragment {
 
         appointmentDao = AppDatabase.getInstance(requireContext()).appointmentDao();
         doctorDao = AppDatabase.getInstance(requireContext()).doctorDao();
-        AppointmentAdapter appointmentAdapter = new AppointmentAdapter(requireContext(), appointmentDao, doctorDao);
+        AppointmentAdapter appointmentAdapter = new AppointmentAdapter(requireContext(), appointmentDao);
 //        appointmentAdapter = new AppointmentAdapter(appointmentDao, doctorDao);
 
         // Retrieve the doctor object from the activity
@@ -67,7 +67,7 @@ public class MainPageDoctorFragment extends Fragment {
                 if (doctor != null) {
                     return appointmentDao.getAppointmentsForDoctor(doctor.getId());
                 }
-                return new ArrayList<>(); // Return empty list if doctor is null
+                return new ArrayList<>();
                 //pana aici
 
             }
