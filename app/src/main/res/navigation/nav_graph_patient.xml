@@ -9,7 +9,19 @@
         android:id="@+id/MainPagePatientFragment"
         android:name="com.example.medical_appointments_application.patient.MainPagePatientFragment"
         android:label="Main Page Patient"
-        tools:layout="@layout/fragment_main_page_patient" />
+        tools:layout="@layout/fragment_main_page_patient" >
+
+        <action
+            android:id="@+id/action_mainPagePatientFragment_to_CreateAppointmentFragment"
+            app:destination="@id/CreateAppointmentFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/CreateAppointmentFragment"
+        android:name="com.example.medical_appointments_application.patient.CreateAppointmentFragment"
+        android:label="Create Appointment"
+        tools:layout="@layout/fragment_create_appointment" />
 
     <fragment
         android:id="@+id/PatientDetailsFragment"

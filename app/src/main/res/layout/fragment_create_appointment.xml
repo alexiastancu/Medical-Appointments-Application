@@ -1,52 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".patient.CreateAppointmentFragment">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/labelDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Selectați data:" />
+        android:text="Selectați data:"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
 
     <EditText
         android:id="@+id/dateEditText"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:hint="Data"
         android:inputType="date"
-        android:hint="Data" />
+        app:layout_constraintTop_toBottomOf="@id/labelDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
 
     <TextView
         android:id="@+id/labelHour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Selectați ora:" />
+        android:text="Selectați ora:"
+        app:layout_constraintTop_toBottomOf="@id/dateEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
 
     <EditText
         android:id="@+id/hourEditText"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:inputType="time"
-        android:hint="Ora" />
+        android:hint="Ora"
+        app:layout_constraintTop_toBottomOf="@id/labelHour"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
 
     <TextView
         android:id="@+id/labelDoctor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Selectați medicul:" />
+        android:text="Selectați medicul:"
+        app:layout_constraintTop_toBottomOf="@id/hourEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
 
     <Spinner
         android:id="@+id/doctorSpinner"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/labelDoctor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
 
     <Button
         android:id="@+id/submitButton"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Submit" />
+        android:text="Submit"
+        app:layout_constraintTop_toBottomOf="@id/doctorSpinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/selector_drawable"/>
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

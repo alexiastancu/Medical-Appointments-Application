@@ -45,11 +45,7 @@ public class PatientActivity extends AppCompatActivity {
         navController.setGraph(R.navigation.nav_graph_patient);
 
         binding.fab.setOnClickListener(view -> {
-            // Replace "YourActivity" with the name of your current activity
-            PatientActivity.this.getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.nav_host_fragment_content_patient, new CreateAppointmentFragment())
-                    .addToBackStack(null)
-                    .commit();
+            navController.navigate(R.id.action_mainPagePatientFragment_to_CreateAppointmentFragment);
         });
 
     }
@@ -75,10 +71,7 @@ public class PatientActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == R.id.action_personal_info) {
+        if (id == R.id.action_personal_info) {
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_patient);
             navController.navigate(R.id.action_mainPagePatientFragment_to_PatientDetailsFragment);
             return true;

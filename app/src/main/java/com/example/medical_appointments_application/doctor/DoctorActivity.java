@@ -83,9 +83,7 @@ public class DoctorActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == R.id.action_personal_info) {
+        if (id == R.id.action_personal_info) {
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_doctor);
             navController.navigate(R.id.action_mainPageDoctorFragment_to_doctorDetailsFragment);
             return true;
