@@ -44,8 +44,14 @@ public class PatientActivity extends AppCompatActivity {
 
         navController.setGraph(R.navigation.nav_graph_patient);
 
-        binding.fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
+        binding.fab.setOnClickListener(view -> {
+            // Replace "YourActivity" with the name of your current activity
+            PatientActivity.this.getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.nav_host_fragment_content_patient, new CreateAppointmentFragment())
+                    .addToBackStack(null)
+                    .commit();
+        });
+
     }
 
     @Override

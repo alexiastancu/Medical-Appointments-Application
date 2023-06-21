@@ -15,6 +15,8 @@ import androidx.room.PrimaryKey;
         indices = {@Index(value = "user_id")}
 )
 public class Doctor implements Parcelable {
+
+
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "doctor_id")
     private int id;
@@ -50,6 +52,8 @@ public class Doctor implements Parcelable {
         specialization = in.readString();
         email = in.readString();
     }
+
+
 
     public static final Creator<Doctor> CREATOR = new Creator<Doctor>() {
         @Override
@@ -125,5 +129,8 @@ public class Doctor implements Parcelable {
     public int describeContents() {
         return 0;
     }
-
+    @Override
+    public String toString() {
+        return name+ " "+ surname;
+    }
 }
