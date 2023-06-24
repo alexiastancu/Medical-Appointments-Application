@@ -1,11 +1,14 @@
 package com.example.medical_appointments_application.patient;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -117,13 +120,18 @@ public class CreateAppointmentFragment extends Fragment {
                         protected void onPostExecute(Void aVoid) {
                             super.onPostExecute(aVoid);
                             // Display success message or perform any necessary UI updates
-                            Toast.makeText(requireContext(), "Appointment created successfully", Toast.LENGTH_SHORT).show();
-                            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-                            fragmentManager.popBackStack();
-                            Fragment previousFragment = fragmentManager.findFragmentByTag("MainPagePatientFragment");
-                            if (previousFragment instanceof MainPagePatientFragment) {
-                                ((MainPagePatientFragment) previousFragment).refreshUI();
-                            }
+//                            Toast.makeText(requireContext(), "Appointment created successfully", Toast.LENGTH_SHORT).show();
+//                            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+//                            fragmentManager.popBackStack();
+//                            Fragment previousFragment = fragmentManager.findFragmentByTag("MainPagePatientFragment");
+//                            if (previousFragment instanceof MainPagePatientFragment) {
+//                                ((MainPagePatientFragment) previousFragment).refreshUI();
+//                            }
+                            requireActivity().setResult(Activity.RESULT_OK);
+
+                            // Navigate back to MainPagePatientFragment
+                            NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_patient);
+                            navController.popBackStack();
                         }
                     }.execute(appointment);
                 } else {
