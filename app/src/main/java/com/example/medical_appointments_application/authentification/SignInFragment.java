@@ -1,6 +1,5 @@
 package com.example.medical_appointments_application.authentification;
 
-
 import static android.content.Context.MODE_PRIVATE;
 
 import android.annotation.SuppressLint;
@@ -64,6 +63,15 @@ public class SignInFragment extends Fragment {
         emailEditText = view.findViewById(R.id.emailEditText);
         passwordEditText = view.findViewById(R.id.passwordEditText);
         signInButton = view.findViewById(R.id.signInButton);
+
+        // Retrieve the saved values from SharedPreferences
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        String savedEmail = sharedPreferences.getString("email", "");
+        String savedPassword = sharedPreferences.getString("password", "");
+
+        // Set the saved values to the EditText fields
+        emailEditText.setText(savedEmail);
+        passwordEditText.setText(savedPassword);
 
         signInButton.setOnClickListener(v -> {
             String email = emailEditText.getText().toString();
@@ -137,5 +145,4 @@ public class SignInFragment extends Fragment {
             }
         }.execute();
     }
-
 }
