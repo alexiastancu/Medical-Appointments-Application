@@ -120,11 +120,8 @@ public class Patient implements Parcelable {
         dest.writeInt(age);
         dest.writeString(telephoneNumber);
     }
-
     @Override
     public int describeContents() {
         return 0;
     }
-
-    // Rest of your class code...
 }

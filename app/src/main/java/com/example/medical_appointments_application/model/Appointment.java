@@ -39,7 +39,7 @@ public class Appointment {
         this.type = type;
     }
 
-    // Getters
+
     public int getId() {
         return id;
     }
@@ -68,7 +68,7 @@ public class Appointment {
         return type;
     }
 
-    // Setters
+
     public void setId(int id) {
         this.id = id;
     }

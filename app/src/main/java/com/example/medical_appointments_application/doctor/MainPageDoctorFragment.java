@@ -30,7 +30,7 @@ public class MainPageDoctorFragment extends Fragment {
     private AppointmentAdapter appointmentAdapter;
 
     public MainPageDoctorFragment() {
-        // Required empty public constructor
+
     }
 
     public static MainPageDoctorFragment newInstance(Doctor doctor) {
@@ -45,33 +45,21 @@ public class MainPageDoctorFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_page_doctor, container, false);
-
         RecyclerView recyclerView = view.findViewById(R.id.appointments);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-
         appointmentDao = AppDatabase.getInstance(requireContext()).appointmentDao();
         doctorDao = AppDatabase.getInstance(requireContext()).doctorDao();
         AppointmentAdapter appointmentAdapter = new AppointmentAdapter(requireContext(), appointmentDao);
-//        appointmentAdapter = new AppointmentAdapter(appointmentDao, doctorDao);
-
-        // Retrieve the doctor object from the activity
         Doctor doctor = ((DoctorActivity) requireActivity()).getDoctor();
 
-
-
-        // Fetch appointments for the doctor
         new AsyncTask<Void, Void, List<Appointment>>() {
             @Override
             protected List<Appointment> doInBackground(Void... voids) {
-                //decomenteaza de aici
                 if (doctor != null) {
                     return appointmentDao.getAppointmentsForDoctor(doctor.getId());
                 }
                 return new ArrayList<>();
-                //pana aici
-
             }
-
             @Override
             protected void onPostExecute(List<Appointment> appointments) {
                 super.onPostExecute(appointments);
@@ -85,33 +73,4 @@ public class MainPageDoctorFragment extends Fragment {
         return view;
     }
 
-    //    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        View view = inflater.inflate(R.layout.fragment_main_page_doctor, container, false);
-//
-//        RecyclerView recyclerView = view.findViewById(R.id.appointments);
-//
-//        // Set the layout manager
-//        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-//
-//        // Initialize the appointmentDao
-//        appointmentDao = AppDatabase.getInstance(requireContext()).appointmentDao();
-//        appointmentAdapter = new AppointmentAdapter(appointmentDao);
-//
-//        new AsyncTask<Void, Void, List<Appointment>>() {
-//            @Override
-//            protected List<Appointment> doInBackground(Void... voids) {
-//                return appointmentDao.getAllAppointments();
-//            }
-//
-//            @Override
-//            protected void onPostExecute(List<Appointment> appointments) {
-//                appointments.add(new Appointment(1, 1, "15/06/2023", "15:00", "Spitalul Regina Maria", "Cardiologie"));
-//                appointmentAdapter.setAppointments(appointments);
-//                recyclerView.setAdapter(appointmentAdapter);
-//            }
-//        }.execute();
-//        return view;
-//    }
 }

@@ -37,7 +37,7 @@ public class SignInFragment extends Fragment {
     private PatientDao patientDao;
 
     public SignInFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -52,7 +52,7 @@ public class SignInFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_sign_in, container, false);
 
         emailEditText = view.findViewById(R.id.emailEditText);
@@ -131,43 +131,6 @@ public class SignInFragment extends Fragment {
     }
 
 
-//    private void signIn(String email, String password) {
-//        new Thread(() -> {
-//            User user = userDao.getUser(email, password);
-//
-//            requireActivity().runOnUiThread(() -> {
-//                if (user != null) {
-//                    String role = user.getRole();
-//
-//                    if (role.equals("Doctor")) {
-//                        Doctor doctor = doctorDao.getDoctorByUserId(user.getId());
-//                        if (doctor != null) {
-//                            Intent intent = new Intent(requireContext(), DoctorActivity.class);
-//                            intent.putExtra("doctor", doctor); // Pass the doctor object to the DoctorActivity
-//                            startActivity(intent);
-//                            requireActivity().finishAffinity();
-//                        } else {
-//                            Toast.makeText(requireContext(), "Invalid doctor account", Toast.LENGTH_SHORT).show();
-//                        }
-//                    } else if (role.equals("Patient")) {
-//                        Patient patient = patientDao.getPatientByUserId(user.getId());
-//                        if (patient != null) {
-//                            Intent intent = new Intent(requireContext(), PatientActivity.class);
-//                            intent.putExtra("patient", patient); // Pass the patient object to the PatientActivity
-//                            startActivity(intent);
-//                            requireActivity().finishAffinity();
-//                        } else {
-//                            Toast.makeText(requireContext(), "Invalid patient account", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//
-//                    Toast.makeText(requireContext(), "Sign-in successful!", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    Toast.makeText(requireContext(), "Invalid email or password", Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//        }).start();
-//    }
 
 
 

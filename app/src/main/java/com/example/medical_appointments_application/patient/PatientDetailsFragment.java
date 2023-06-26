@@ -34,7 +34,6 @@ public class PatientDetailsFragment extends Fragment {
         TextView ageTextView = view.findViewById(R.id.ageTextView);
         TextView telephoneNumberTextView = view.findViewById(R.id.telephoneNumberTextView);
 
-        // Retrieve the patient object from the activity
         Patient patient = ((PatientActivity) requireActivity()).getPatient();
 
         if (patient != null) {
@@ -46,9 +45,6 @@ public class PatientDetailsFragment extends Fragment {
 
         return view;
     }
-
-
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

@@ -15,7 +15,7 @@ import com.example.medical_appointments_application.R;
 
 public class AuthMethodFragment extends Fragment {
     public AuthMethodFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -34,13 +34,13 @@ public class AuthMethodFragment extends Fragment {
         Button signUpButton = view.findViewById(R.id.signUpButton);
 
         signInButton.setOnClickListener(v -> {
-            // Navigate to the Sign In fragment
+
             NavHostFragment.findNavController(AuthMethodFragment.this)
                     .navigate(R.id.action_authMethodFragment_to_signInFragment);
         });
 
         signUpButton.setOnClickListener(v -> {
-            // Navigate to the Sign Up fragment
+
             NavHostFragment.findNavController(AuthMethodFragment.this)
                     .navigate(R.id.action_authMethodFragment_to_signUpFragment);
         });

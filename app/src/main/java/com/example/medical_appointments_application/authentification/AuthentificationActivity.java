@@ -22,21 +22,6 @@ public class AuthentificationActivity extends AppCompatActivity {
 
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setTitle("Exit Confirmation")
-//                .setMessage("Are you sure you want to exit?")
-//                .setPositiveButton("Yes", (dialog, which) -> {
-//                    // Exit the app
-//                    finish();
-//                })
-//                .setNegativeButton("No", (dialog, which) -> {
-//                    // Dismiss the dialog and do nothing
-//                    dialog.dismiss();
-//                })
-//                .show();
-//    }
 
     @Override
     public void onBackPressed() {
@@ -47,16 +32,16 @@ public class AuthentificationActivity extends AppCompatActivity {
             builder.setTitle("Exit Confirmation")
                     .setMessage("Are you sure you want to exit?")
                     .setPositiveButton("Yes", (dialog, which) -> {
-                        // Exit the app
+
                         finish();
                     })
                     .setNegativeButton("No", (dialog, which) -> {
-                        // Dismiss the dialog and do nothing
+
                         dialog.dismiss();
                     })
                     .show();
         } else {
-            super.onBackPressed(); // Go back normally
+            super.onBackPressed();
         }
     }
 }

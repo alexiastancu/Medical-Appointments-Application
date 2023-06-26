@@ -28,13 +28,10 @@ public class DoctorDetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_doctor_details, container, false);
-
         TextView nameTextView = view.findViewById(R.id.nameTextView);
         TextView surnameTextView = view.findViewById(R.id.surnameTextView);
         TextView specializationTextView = view.findViewById(R.id.specializationTextView);
         TextView emailTextView = view.findViewById(R.id.emailTextView);
-
-        // Retrieve the doctor object from the activity
         Doctor doctor = ((DoctorActivity) requireActivity()).getDoctor();
 
         if (doctor != null) {
@@ -46,9 +43,6 @@ public class DoctorDetailsFragment extends Fragment {
 
         return view;
     }
-
-
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

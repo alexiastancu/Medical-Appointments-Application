@@ -39,24 +39,11 @@ public class DoctorActivity extends AppCompatActivity {
 
         binding = ActivityDoctorBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        // Retrieve the doctor object from the intent
         doctor = getIntent().getParcelableExtra("doctor");
-
-
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_doctor);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
         navController.setGraph(R.navigation.nav_graph_doctor);
-
-//        binding.fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
     }
 
 
@@ -70,19 +57,14 @@ public class DoctorActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.menu_doctor, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_personal_info) {
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_doctor);
             navController.navigate(R.id.action_mainPageDoctorFragment_to_doctorDetailsFragment);
@@ -104,11 +86,11 @@ public class DoctorActivity extends AppCompatActivity {
             builder.setTitle("Exit Confirmation")
                     .setMessage("Are you sure you want to exit?")
                     .setPositiveButton("Yes", (dialog, which) -> {
-                        // Exit the app
+
                         finish();
                     })
                     .setNegativeButton("No", (dialog, which) -> {
-                        // Reset the back press counter
+
                         backPressCounter = 0;
                         dialog.dismiss();
                     })
