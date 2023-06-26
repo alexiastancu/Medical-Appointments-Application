@@ -1,6 +1,7 @@
 package com.example.medical_appointments_application.authentification;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -40,6 +41,7 @@ public class SignUpFragment extends Fragment {
     private UserDao userDao;
     private DoctorDao doctorDao;
     private PatientDao patientDao;
+    private SharedPreferences sharedPreferences;
 
     public SignUpFragment() {
 
@@ -53,64 +55,74 @@ public class SignUpFragment extends Fragment {
         doctorDao = database.doctorDao();
         patientDao = database.patientDao();
         AppointmentDao appointmentDao = database.appointmentDao();
+
+        sharedPreferences = requireContext().getSharedPreferences("MyPrefs", 0);
     }
 
-@Override
-public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                         Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
-    nameEditText = view.findViewById(R.id.nameEditText);
-    surnameEditText = view.findViewById(R.id.surnameEditText);
-    ageEditText = view.findViewById(R.id.ageEditText);
-    phoneEditText = view.findViewById(R.id.telephoneEditText);
-    emailEditText = view.findViewById(R.id.emailEditText);
-    passwordEditText = view.findViewById(R.id.passwordEditText);
-    roleSpinner = view.findViewById(R.id.roleSpinner);
-    specializationSpinner = view.findViewById(R.id.specializationSpinner);
-    Button signUpButton = view.findViewById(R.id.signUpButton);
-    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(requireContext(),
-            R.array.roles_array, android.R.layout.simple_spinner_item);
-    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-    roleSpinner.setAdapter(adapter);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
+        nameEditText = view.findViewById(R.id.nameEditText);
+        surnameEditText = view.findViewById(R.id.surnameEditText);
+        ageEditText = view.findViewById(R.id.ageEditText);
+        phoneEditText = view.findViewById(R.id.telephoneEditText);
+        emailEditText = view.findViewById(R.id.emailEditText);
+        passwordEditText = view.findViewById(R.id.passwordEditText);
+        roleSpinner = view.findViewById(R.id.roleSpinner);
+        specializationSpinner = view.findViewById(R.id.specializationSpinner);
+        Button signUpButton = view.findViewById(R.id.signUpButton);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(requireContext(),
+                R.array.roles_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        roleSpinner.setAdapter(adapter);
 
-    roleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            String selectedRole = parent.getItemAtPosition(position).toString();
+        roleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedRole = parent.getItemAtPosition(position).toString();
 
-            if (selectedRole.equals("Doctor")) {
-                specializationSpinner.setVisibility(View.VISIBLE);
-                ageEditText.setVisibility(View.GONE);
-            } else {
-                specializationSpinner.setVisibility(View.GONE);
-                ageEditText.setVisibility(View.VISIBLE);
+                if (selectedRole.equals("Doctor")) {
+                    specializationSpinner.setVisibility(View.VISIBLE);
+                    ageEditText.setVisibility(View.GONE);
+                } else {
+                    specializationSpinner.setVisibility(View.GONE);
+                    ageEditText.setVisibility(View.VISIBLE);
+                }
             }
-        }
 
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-        }
-    });
+            }
+        });
 
-    signUpButton.setOnClickListener(v -> {
-        String name = nameEditText.getText().toString();
-        String surname = surnameEditText.getText().toString();
-        String email = emailEditText.getText().toString();
-        String password = passwordEditText.getText().toString();
-        String role = roleSpinner.getSelectedItem().toString();
-        if(role.equals("Doctor")) {
-            String specialization = specializationSpinner.getSelectedItem().toString();
-            signUp(name, surname, email, password, role, specialization);
-        }
-        else
-        {
-            signUp(name, surname, email, password, role, "");
-        }
-    });
+        // Setarea valorilor salvate pentru variabilele EditText
+        nameEditText.setText(sharedPreferences.getString("name", ""));
+        surnameEditText.setText(sharedPreferences.getString("surname", ""));
+        ageEditText.setText(sharedPreferences.getString("age", ""));
+        phoneEditText.setText(sharedPreferences.getString("phone", ""));
+        emailEditText.setText(sharedPreferences.getString("email", ""));
+        passwordEditText.setText(sharedPreferences.getString("password", ""));
 
-    return view;
-}
+        signUpButton.setOnClickListener(v -> {
+            String name = nameEditText.getText().toString();
+            String surname = surnameEditText.getText().toString();
+            String email = emailEditText.getText().toString();
+            String password = passwordEditText.getText().toString();
+            String role = roleSpinner.getSelectedItem().toString();
+            if(role.equals("Doctor")) {
+                String specialization = specializationSpinner.getSelectedItem().toString();
+                signUp(name, surname, email, password, role, specialization);
+            }
+            else
+            {
+                signUp(name, surname, email, password, role, "");
+            }
+        });
+
+        return view;
+    }
 
     private void signUp(String name, String surname, String email, String password, String role, String specialization) {
         @SuppressLint("StaticFieldLeak")
@@ -155,7 +167,6 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
 
         signUpTask.execute(name, surname, email, password, role, specialization);
     }
-
 
     private boolean verifyFields(String name, String surname, String email, String password, String role, String specialization) {
         if (name.isEmpty() || surname.isEmpty() || email.isEmpty() || password.isEmpty()) {

@@ -127,7 +127,6 @@ public class SignInFragment extends Fragment {
 
                     Toast.makeText(requireContext(), "Sign-in successful!", Toast.LENGTH_SHORT).show();
 
-                    // Save user credentials in SharedPreferences
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("email", email);
                     editor.putString("password", password);
