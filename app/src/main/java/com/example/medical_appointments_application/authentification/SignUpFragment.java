@@ -1,5 +1,7 @@
 package com.example.medical_appointments_application.authentification;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -56,7 +58,7 @@ public class SignUpFragment extends Fragment {
         patientDao = database.patientDao();
         AppointmentDao appointmentDao = database.appointmentDao();
 
-        sharedPreferences = requireContext().getSharedPreferences("MyPrefs", 0);
+        sharedPreferences = requireContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
     }
 
     @Override

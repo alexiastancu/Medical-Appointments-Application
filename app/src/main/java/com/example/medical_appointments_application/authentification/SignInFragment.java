@@ -1,6 +1,8 @@
 package com.example.medical_appointments_application.authentification;
 
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -49,7 +51,8 @@ public class SignInFragment extends Fragment {
         userDao = userDatabase.userDao();
         doctorDao = userDatabase.doctorDao();
         patientDao = userDatabase.patientDao();
-        sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+
+        sharedPreferences = requireContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
     }
 
     @Override
@@ -95,6 +98,7 @@ public class SignInFragment extends Fragment {
                             @Override
                             protected void onPostExecute(Doctor doctor) {
                                 if (doctor != null) {
+                                    sharedPreferences.edit().putInt("userId", user.getId()).apply();
                                     Intent intent = new Intent(requireContext(), DoctorActivity.class);
                                     intent.putExtra("doctor", doctor);
                                     startActivity(intent);
@@ -114,6 +118,7 @@ public class SignInFragment extends Fragment {
                             @Override
                             protected void onPostExecute(Patient patient) {
                                 if (patient != null) {
+                                    sharedPreferences.edit().putInt("userId", user.getId()).apply();
                                     Intent intent = new Intent(requireContext(), PatientActivity.class);
                                     intent.putExtra("patient", patient);
                                     startActivity(intent);
@@ -126,11 +131,6 @@ public class SignInFragment extends Fragment {
                     }
 
                     Toast.makeText(requireContext(), "Sign-in successful!", Toast.LENGTH_SHORT).show();
-
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("email", email);
-                    editor.putString("password", password);
-                    editor.apply();
                 } else {
                     Toast.makeText(requireContext(), "Invalid email or password", Toast.LENGTH_SHORT).show();
                 }
