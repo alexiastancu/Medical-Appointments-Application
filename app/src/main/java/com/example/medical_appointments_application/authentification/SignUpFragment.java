@@ -99,7 +99,7 @@ public class SignUpFragment extends Fragment {
             }
         });
 
-        // Setarea valorilor salvate pentru variabilele EditText
+        // Set the saved values to the EditText fields
         nameEditText.setText(sharedPreferences.getString("name", ""));
         surnameEditText.setText(sharedPreferences.getString("surname", ""));
         ageEditText.setText(sharedPreferences.getString("age", ""));
@@ -113,12 +113,21 @@ public class SignUpFragment extends Fragment {
             String email = emailEditText.getText().toString();
             String password = passwordEditText.getText().toString();
             String role = roleSpinner.getSelectedItem().toString();
-            if(role.equals("Doctor")) {
+
+            // Save the entered data in SharedPreferences
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("name", name);
+            editor.putString("surname", surname);
+            editor.putString("age", ageEditText.getText().toString());
+            editor.putString("phone", phoneEditText.getText().toString());
+            editor.putString("email", email);
+            editor.putString("password", password);
+            editor.apply();
+
+            if (role.equals("Doctor")) {
                 String specialization = specializationSpinner.getSelectedItem().toString();
                 signUp(name, surname, email, password, role, specialization);
-            }
-            else
-            {
+            } else {
                 signUp(name, surname, email, password, role, "");
             }
         });
@@ -232,5 +241,4 @@ public class SignUpFragment extends Fragment {
     private void showToast(String message) {
         requireActivity().runOnUiThread(() -> Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show());
     }
-
 }
