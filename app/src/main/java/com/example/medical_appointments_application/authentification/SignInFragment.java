@@ -2,7 +2,9 @@ package com.example.medical_appointments_application.authentification;
 
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -28,13 +30,13 @@ import com.example.medical_appointments_application.model.User;
 import com.example.medical_appointments_application.patient.PatientActivity;
 
 public class SignInFragment extends Fragment {
-
     private EditText emailEditText;
     private EditText passwordEditText;
     private Button signInButton;
     private UserDao userDao;
     private DoctorDao doctorDao;
     private PatientDao patientDao;
+    private SharedPreferences sharedPreferences;
 
     public SignInFragment() {
 
@@ -47,6 +49,7 @@ public class SignInFragment extends Fragment {
         userDao = userDatabase.userDao();
         doctorDao = userDatabase.doctorDao();
         patientDao = userDatabase.patientDao();
+        sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
     }
 
     @Override
@@ -123,20 +126,17 @@ public class SignInFragment extends Fragment {
                     }
 
                     Toast.makeText(requireContext(), "Sign-in successful!", Toast.LENGTH_SHORT).show();
+
+                    // Save user credentials in SharedPreferences
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("email", email);
+                    editor.putString("password", password);
+                    editor.apply();
                 } else {
                     Toast.makeText(requireContext(), "Invalid email or password", Toast.LENGTH_SHORT).show();
                 }
             }
         }.execute();
     }
-
-
-
-
-
-
-
-
-
 
 }

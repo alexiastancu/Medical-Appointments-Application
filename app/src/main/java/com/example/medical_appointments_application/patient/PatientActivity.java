@@ -35,7 +35,7 @@ public class PatientActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         patient = getIntent().getParcelableExtra("patient");
-    
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_patient);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
