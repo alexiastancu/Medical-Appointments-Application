@@ -19,7 +19,6 @@ public class AuthentificationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_authentification);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         navController.navigate(R.id.authMethodFragment);
-
     }
 
 
@@ -32,11 +31,9 @@ public class AuthentificationActivity extends AppCompatActivity {
             builder.setTitle("Exit Confirmation")
                     .setMessage("Are you sure you want to exit?")
                     .setPositiveButton("Yes", (dialog, which) -> {
-
                         finish();
                     })
                     .setNegativeButton("No", (dialog, which) -> {
-
                         dialog.dismiss();
                     })
                     .show();
