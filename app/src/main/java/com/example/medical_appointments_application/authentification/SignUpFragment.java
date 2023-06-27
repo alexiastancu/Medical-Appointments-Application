@@ -60,7 +60,29 @@ public class SignUpFragment extends Fragment {
 
         sharedPreferences = requireContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        nameEditText.setText(sharedPreferences.getString("name", ""));
+        surnameEditText.setText(sharedPreferences.getString("surname", ""));
+        ageEditText.setText(sharedPreferences.getString("age", ""));
+        phoneEditText.setText(sharedPreferences.getString("phone", ""));
+        emailEditText.setText(sharedPreferences.getString("email", ""));
+        passwordEditText.setText(sharedPreferences.getString("password", ""));
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("name", nameEditText.getText().toString());
+        editor.putString("surname", surnameEditText.getText().toString());
+        editor.putString("age", ageEditText.getText().toString());
+        editor.putString("phone", phoneEditText.getText().toString());
+        editor.putString("email", emailEditText.getText().toString());
+        editor.putString("password", passwordEditText.getText().toString());
+        editor.apply();
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

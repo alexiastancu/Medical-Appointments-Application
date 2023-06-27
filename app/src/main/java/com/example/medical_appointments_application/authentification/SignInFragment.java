@@ -61,12 +61,9 @@ public class SignInFragment extends Fragment {
         passwordEditText = view.findViewById(R.id.passwordEditText);
         signInButton = view.findViewById(R.id.signInButton);
 
-        // Retrieve the saved values from SharedPreferences
-        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        // Set the saved values to the EditText fields
         String savedEmail = sharedPreferences.getString("email", "");
         String savedPassword = sharedPreferences.getString("password", "");
-
-        // Set the saved values to the EditText fields
         emailEditText.setText(savedEmail);
         passwordEditText.setText(savedPassword);
 
@@ -142,4 +139,22 @@ public class SignInFragment extends Fragment {
             }
         }.execute();
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        String savedEmail = sharedPreferences.getString("email", "");
+        String savedPassword = sharedPreferences.getString("password", "");
+        emailEditText.setText(savedEmail);
+        passwordEditText.setText(savedPassword);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        String email = emailEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
+        sharedPreferences.edit().putString("email", email).apply();
+        sharedPreferences.edit().putString("password", password).apply();
+    }
+
 }
